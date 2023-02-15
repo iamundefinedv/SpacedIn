@@ -1,0 +1,41 @@
+A platform for esports players, content creators, graphic and video editors, and esports staff to find a home
+
+Organization:
+    * Id
+    * Owner (user_id)
+    * Name (string)
+    * Bio
+    * PrimaryColour (string - hex value)
+    * verified (boolean)
+    * premium (boolean)
+    Roles:
+        * Owner
+        * General Managers
+        * Managers 
+        * Creators
+        * Players
+        * Community
+
+
+Player Profile: Maybe get this stuff from discord, or discord related info?
+id uuid not null references auth.users on delete cascade,
+  first_name text,
+  last_name text,
+  user_name text,
+  avatar_url text,
+  twitter_username text,
+  twitch_username text,
+  youtube_link text,
+  behance_link text,
+  biography text,
+  game_list text array,
+  verified bool,
+  premium bool,
+  organization_id uuid not null references public.organizations,
+  organization_role text
+
+
+  Registration done threw email?
+
+  Discord is the main Authentication provider
+  Users can link twitter, google, etc 

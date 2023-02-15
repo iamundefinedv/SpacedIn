@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
             };
         }
 
-        const { data, error, status } = await supabase.from('profiles').select().eq('user_id', session.user.id).single();
+        const { data, error, status } = await supabase.from('profiles').select().eq('id', session.user.id).single();
 
         if (error) throw error;
 

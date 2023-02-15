@@ -1,5 +1,40 @@
 A platform for esports players, content creators, graphic and video editors, and esports staff to find a home
 
+
+Player Posting:
+  * Id
+  * Owner (user id)
+  * Title
+  * Description
+  * Game
+  * Active (users can keep recycling postings, if theyre active theyll appear)
+
+Staff Posting:
+  * Id
+  * Owner (user id)
+  * Title
+  * Description
+  * Position of Interest?
+  * Active (users can keep recycling postings, if theyre active theyll appear)
+
+Team Posting:
+  * Id
+  * Owner (user id)
+  * Title
+  * Team Name
+  * Description
+  * Game
+  * Active (users can keep recycling postings, if theyre active theyll appear)
+
+Org Posting:
+  * Id
+  * Owner (user id)
+  * Org Id
+  * Org Name
+  * Title
+  * Description
+  * Active (users can keep recycling postings, if theyre active theyll appear)
+
 Organization:
     * Id
     * Owner (user_id)

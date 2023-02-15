@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-export default function DashboardSideNav({ profile, createOrg = false }: { profile: boolean, createOrg: boolean; }) {
+export default function DashboardSideNav({ profile, createOrg = false }: { profile: boolean, createOrg?: boolean; }) {
     return (
         <>
             <div id="layoutSidenav_nav">
-                <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <nav className="sb-sidenav accordion sb-sidenav-dark shadow" id="sidenavAccordion">
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             {profile ? <>
@@ -20,9 +20,9 @@ export default function DashboardSideNav({ profile, createOrg = false }: { profi
                                 <Link className="nav-link" href="/dashboard/profile/settings">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Documents
-                                </Link> <Link className="nav-link" href="/dashboard/profile/settings">
+                                </Link> <Link className="nav-link" href="/dashboard/profile/applications">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-                                    Sent Applications
+                                    Applications
                                 </Link>
                                 {/* <div className="sb-sidenav-menu-heading">Profile Settings</div> */}
                                 <Link className="nav-link" href="/dashboard">

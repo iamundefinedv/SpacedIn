@@ -7,7 +7,6 @@ import { GetServerSidePropsContext, NextApiRequest } from "next";
 import { useEffect, useState } from "react";
 import { Alert } from "reactstrap";
 
-import { validate } from 'validate.js';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const supabase = createServerSupabaseClient(context);
@@ -22,11 +21,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         };
     }
 
-    const { data, error, status } = await supabase.from('profiles').select().eq('user_id', session.user.id).single();
-
-    // const { data, error } = await supabase.from('profiles').select().eq('id', session.user.id);
-    // console.log(data);
-
+    const { data, error, status } = await supabase.from('profiles').select().eq('id', session.user.id).single();
 
     return {
         props: {
@@ -35,7 +30,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 }
 
-export default function Settings({ session, data }: { session: Session, data: any; }) {
+export default function Profile({ session, data }: { session: Session, data: any; }) {
 
     const supabase = useSupabaseClient();
     const user = useUser();
@@ -50,8 +45,9 @@ export default function Settings({ session, data }: { session: Session, data: an
 
     const [isProfileSetup, setIsProfileSetup] = useState();
 
-    const [firstName, setFirstName] = useState<string>(data.firstname || '');
-    const [lastName, setLastName] = useState<string>(data.lastname || '');
+    const [firstName, setFirstName] = useState<string>(data.first_name || '');
+    const [lastName, setLastName] = useState<string>(data.last_name || '');
+    const [username, setUsername] = useState<string>(data.username || '');
     const [twitterUsername, setTwitterUsername] = useState<string>(data.twitter_username || '');
     const [twitchUsername, setTwitchUsername] = useState<string>(data.twitch_username || '');
     const [youtubeLink, setYoutubeLink] = useState<string>(data.youtube_link || '');
@@ -89,12 +85,12 @@ export default function Settings({ session, data }: { session: Session, data: an
         try {
 
             const { error } = await supabase.from('profiles').upsert({
-                user_id: user?.id,
-                firstname: firstName,
-                lastname: lastName,
+                id: user?.id,
+                first_name: firstName,
+                last_name: lastName,
+                username,
                 biography,
-                username: user?.user_metadata.name,
-                avatar_url: user?.user_metadata.avatar_url,
+                // avatar_url: user?.user_metadata.avatar_url,
                 twitter_username: twitterUsername,
                 twitch_username: twitchUsername,
                 behance_link: behanceLink,
@@ -171,14 +167,17 @@ export default function Settings({ session, data }: { session: Session, data: an
                                                         <div className="row mt-3">
                                                             <div className="col-6">
                                                                 <div className="form-group">
-                                                                    <label htmlFor="exampleFormControlInput1">Twitter (no @)</label>
-                                                                    <input value={twitterUsername} onChange={e => setTwitterUsername(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="johnDoe001" />
+                                                                    <label htmlFor="exampleFormControlInput1">Username</label>
+                                                                    <input value={username} onChange={e => setUsername(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="johnDoe001" />
                                                                 </div>
                                                             </div>
-                                                            <div className="col-6">
+                                                            <div className="col-6 mt-4">
                                                                 <div className="form-group">
-                                                                    <label htmlFor="exampleFormControlInput1">Twitch</label>
-                                                                    <input value={twitchUsername} onChange={e => setTwitchUsername(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="johnDoe001" />
+                                                                    <div className="d-flex justify-content-center">
+                                                                        <button style={{ backgroundColor: '#7289da', color: '#fff' }} className="btn me-3"><i className="bi bi-discord"></i></button>
+                                                                        <button style={{ backgroundColor: '#26a7de', color: '#fff' }} className="btn me-3"><i className="bi bi-twitter"></i></button>
+                                                                        <button style={{ backgroundColor: '#DB4437', color: '#fff' }} className="btn me-3"><i className="bi bi-google"></i></button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

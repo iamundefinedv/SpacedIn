@@ -25,6 +25,11 @@ body {
   color: var(--main-white);
 }
 
+.container {
+  max-width: 1440px;
+  width: 100%;
+}
+
 .navbar-dark .nav-link {
   color: var(--main-white) !important;
 }
@@ -72,6 +77,7 @@ body {
 }
 
 .form-control:focus {
+  color: var(--main-white);
   background-color: var(--main-bg-colour)
 }
 

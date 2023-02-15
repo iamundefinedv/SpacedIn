@@ -22,7 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         };
     }
 
-    const { data, error, status } = await supabase.from('profiles').select().eq('user_id', session.user.id).single();
+    const { data, error, status } = await supabase.from('profiles').select().eq('id', session.user.id).single();
 
     // const { data, error } = await supabase.from('profiles').select().eq('id', session.user.id);
     // console.log(data);
@@ -50,8 +50,10 @@ export default function Settings({ session, data }: { session: Session, data: an
 
     const [isProfileSetup, setIsProfileSetup] = useState();
 
-    const [firstName, setFirstName] = useState<string>(data.firstname || '');
-    const [lastName, setLastName] = useState<string>(data.lastname || '');
+    const [firstName, setFirstName] = useState<string>(data.first_name || '');
+    const [lastName, setLastName] = useState<string>(data.last_name || '');
+    const [username, setUsername] = useState<string>(data.username || '');
+
     const [twitterUsername, setTwitterUsername] = useState<string>(data.twitter_username || '');
     const [twitchUsername, setTwitchUsername] = useState<string>(data.twitch_username || '');
     const [youtubeLink, setYoutubeLink] = useState<string>(data.youtube_link || '');
@@ -82,31 +84,6 @@ export default function Settings({ session, data }: { session: Session, data: an
             //     setLoading(false);
             // }, 2000);
             setLoading(false);
-        }
-    };
-
-    const updateProfile = async () => {
-        try {
-
-            const { error } = await supabase.from('profiles').upsert({
-                user_id: user?.id,
-                firstname: firstName,
-                lastname: lastName,
-                biography,
-                username: user?.user_metadata.name,
-                avatar_url: user?.user_metadata.avatar_url,
-                twitter_username: twitterUsername,
-                twitch_username: twitchUsername,
-                behance_link: behanceLink,
-                youtube_link: youtubeLink
-            });
-            if (error) throw error;
-
-            setSuccessAlertVisible(true);
-
-        } catch (err) {
-            console.log(err);
-            setErrorAlertVisible(true);
         }
     };
 
@@ -201,7 +178,7 @@ export default function Settings({ session, data }: { session: Session, data: an
                                                             <textarea value={biography} onChange={e => setBiography(e.target.value)} className="form-control mt-2" id="exampleFormControlTextarea1" placeholder='I like to...' rows={10}></textarea>
                                                         </div>
                                                         <div className="form-group mt-3">
-                                                            <button className="btn btn-primary float-end" onClick={updateProfile}>Update</button>
+                                                            {/* <button className="btn btn-primary float-end" onClick={}>Update</button> */}
                                                         </div>
                                                     </span>
                                                 </div>

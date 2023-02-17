@@ -8,7 +8,7 @@ export default function Footer() {
                             <p className="col-md-4 mb-0 text-muted mt-2">&copy; 2023 ScopedIn, Inc</p>
 
                             <a href="/" className="col-md-4 d-flex justify-content-center  mb-md-0 me-md-auto link-dark text-decoration-none">
-                                <img width={50} height={50} src="/img/Spacedin.svg" alt="" />
+                                <img width={50} height={50} src="/img/scopedin.png" alt="" />
                             </a>
 
                             <ul className="nav col-md-4 justify-content-end">

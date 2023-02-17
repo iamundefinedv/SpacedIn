@@ -1,14 +1,14 @@
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
 import modal from "bootstrap/js/dist/modal";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Label, Alert } from "reactstrap";
-import { validate } from "validate.js";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
+import {Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Label, Alert} from "reactstrap";
+import {validate} from "validate.js";
 
-export default function Navbar({ dashboard }: { dashboard: boolean; }) {
+export default function Navbar({dashboard}: { dashboard: boolean; }) {
 
-    const container = dashboard ? 'container-fluid' : 'container';
+    const container = dashboard ? "container-fluid" : "container";
 
     const router = useRouter();
 
@@ -19,20 +19,20 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
     const toggleRegisterModal = () => setRegisterModal(!registerModal);
 
     const [errorAlertVisible, setErrorAlertVisible] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('There was an Error. Please Try again.');
+    const [errorMessage, setErrorMessage] = useState("There was an Error. Please Try again.");
 
     const [successAlertVisible, setSuccessAlertVisible] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState("");
 
     const onErrorDismiss = () => setErrorAlertVisible(false);
     const onSuccessDismiss = () => setSuccessAlertVisible(false);
 
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
-    const [userName, setUserName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [firstName, setFirstName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
 
     const supabaseClient = useSupabaseClient();
@@ -81,24 +81,24 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
 
 
         if (registerInputErrors) {
-            setErrorMessage('There was an error with one of your input fields. Please Try again.');
+            setErrorMessage("There was an error with one of your input fields. Please Try again.");
             setErrorAlertVisible(true);
         } else {
 
             if (password !== confirmPassword) {
-                setErrorMessage('Your passwords do not match. Please try again.');
+                setErrorMessage("Your passwords do not match. Please try again.");
                 setErrorAlertVisible(true);
                 return;
             }
 
             try {
-                const { error } = await supabaseClient.auth.signUp({
+                const {error} = await supabaseClient.auth.signUp({
                     email,
                     password,
                     options: {
                         data: {
                             first_name: firstName,
-                            last_name: lastName ? lastName : '',
+                            last_name: lastName ? lastName : "",
                             username: userName
                         }
                     }
@@ -115,17 +115,17 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
 
             } catch (err) {
                 console.log(err);
-                setErrorMessage('There was an error creating your account. Please try again later.');
+                setErrorMessage("There was an error creating your account. Please try again later.");
                 setErrorAlertVisible(true);
             } finally {
                 // setSuccessMessage(`Welcome ${firstName}, Your account has successfully been created. You must confirm your email before you can login`);
                 // setSuccessAlertVisible(true);
-                setEmail('');
-                setPassword('');
-                setFirstName('');
-                setLastName('');
-                setUserName('');
-                setConfirmPassword('');
+                setEmail("");
+                setPassword("");
+                setFirstName("");
+                setLastName("");
+                setUserName("");
+                setConfirmPassword("");
             }
         }
     };
@@ -156,22 +156,23 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
         console.log(loginInputErrors);
 
         if (loginInputErrors) {
-            setErrorMessage('There was an error. Please Try again.');
+            setErrorMessage("There was an error. Please Try again.");
             setErrorAlertVisible(true);
         } else {
             try {
-                const { error } = await supabaseClient.auth.signInWithPassword({
+                const {error} = await supabaseClient.auth.signInWithPassword({
                     email, password
                 });
                 if (error) {
                     setErrorMessage(error.message);
                     setErrorAlertVisible(true);
-                    setEmail('');
-                    setPassword('');
+                    setEmail("");
+                    setPassword("");
                     throw error;
-                };
+                }
+                ;
 
-                router.push('/dashboard/profile');
+                router.push("/dashboard/profile");
 
             } catch (err) {
                 console.log(err);
@@ -181,14 +182,14 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
     };
 
     const signInWithDiscord = async () => {
-        const { error } = await supabaseClient.auth.signInWithOAuth({
-            provider: 'discord'
+        const {error} = await supabaseClient.auth.signInWithOAuth({
+            provider: "discord"
         });
     };
 
     const handleLogoutClick = async () => {
-        const { error } = await supabaseClient.auth.signOut();
-        router.push('/');
+        const {error} = await supabaseClient.auth.signOut();
+        router.push("/");
     };
 
     useEffect(() => {
@@ -206,14 +207,14 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
     return (
         <>
 
-            <Modal isOpen={loginModal} toggle={toggleLoginModal} >
+            <Modal isOpen={loginModal} toggle={toggleLoginModal}>
                 <ModalBody>
                     <div className="container">
-                        <h3 className='text-center pb-2 fw-bold'>Login To Your Account</h3>
-                        <Alert color='warning' isOpen={errorAlertVisible} toggle={onErrorDismiss}>
+                        <h3 className="text-center pb-2 fw-bold">Login To Your Account</h3>
+                        <Alert color="warning" isOpen={errorAlertVisible} toggle={onErrorDismiss}>
                             {errorMessage}
                         </Alert>
-                        <Alert color='success' isOpen={successAlertVisible} toggle={onSuccessDismiss}>
+                        <Alert color="success" isOpen={successAlertVisible} toggle={onSuccessDismiss}>
                             {successMessage}
                         </Alert>
                         <div className="row mt-3">
@@ -244,26 +245,27 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
                                     onChange={e => setPassword(e.target.value)}
                                     value={password}
                                 />
-                                <Button className='mt-4' block={true} color="primary" onClick={signInUser}>
+                                <Button className="mt-4" block={true} color="primary" onClick={signInUser}>
                                     Login
                                 </Button>
                             </div>
                         </div>
                     </div>
                 </ModalBody>
-                <ModalFooter className='border-top'>
+                <ModalFooter className="border-top">
                     <div className="container mb-4">
                         <div className="row">
                             <div className="col">
-                                <p className='text-center mb-3'>OR</p>
+                                <p className="text-center mb-3">OR</p>
                                 <div className="d-flex justify-content-center">
-                                    <button onClick={signInWithDiscord} style={{ backgroundColor: '#7289da', color: '#fff' }} className="btn me-3">
+                                    <button onClick={signInWithDiscord}
+                                            style={{backgroundColor: "#7289da", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-discord"></i>
                                     </button>
-                                    <button style={{ backgroundColor: '#26a7de', color: '#fff' }} className="btn me-3">
+                                    <button style={{backgroundColor: "#26a7de", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-twitter"></i>
                                     </button>
-                                    <button style={{ backgroundColor: '#DB4437', color: '#fff' }} className="btn me-3">
+                                    <button style={{backgroundColor: "#DB4437", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-google"></i>
                                     </button>
                                 </div>
@@ -274,15 +276,15 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
             </Modal>
 
 
-            <Modal isOpen={registerModal} toggle={toggleRegisterModal} >
+            <Modal isOpen={registerModal} toggle={toggleRegisterModal}>
                 <ModalBody>
                     <div className="container">
                         <div className="row">
-                            <h3 className='fw-bold text-center pb-4'>Create a New Account</h3>
-                            <Alert color='warning' isOpen={errorAlertVisible} toggle={onErrorDismiss}>
+                            <h3 className="fw-bold text-center pb-4">Create a New Account</h3>
+                            <Alert color="warning" isOpen={errorAlertVisible} toggle={onErrorDismiss}>
                                 {errorMessage}
                             </Alert>
-                            <Alert color='success' isOpen={successAlertVisible} toggle={onSuccessDismiss}>
+                            <Alert color="success" isOpen={successAlertVisible} toggle={onSuccessDismiss}>
                                 {successMessage}
                             </Alert>
                             <div className="col-md-6">
@@ -371,26 +373,27 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
 
                             </div>
                             <div className="col-md-12">
-                                <Button className='mt-4' block={true} color="primary" onClick={createNewAccount}>
+                                <Button className="mt-4" block={true} color="primary" onClick={createNewAccount}>
                                     Create Account
                                 </Button>
                             </div>
                         </div>
                     </div>
                 </ModalBody>
-                <ModalFooter className='border-top'>
+                <ModalFooter className="border-top">
                     <div className="container mb-4">
                         <div className="row">
                             <div className="col">
-                                <p className='text-center mb-3'>OR</p>
+                                <p className="text-center mb-3">OR</p>
                                 <div className="d-flex justify-content-center">
-                                    <button onClick={signInWithDiscord} style={{ backgroundColor: '#7289da', color: '#fff' }} className="btn me-3">
+                                    <button onClick={signInWithDiscord}
+                                            style={{backgroundColor: "#7289da", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-discord"></i>
                                     </button>
-                                    <button style={{ backgroundColor: '#26a7de', color: '#fff' }} className="btn me-3">
+                                    <button style={{backgroundColor: "#26a7de", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-twitter"></i>
                                     </button>
-                                    <button style={{ backgroundColor: '#DB4437', color: '#fff' }} className="btn me-3">
+                                    <button style={{backgroundColor: "#DB4437", color: "#fff"}} className="btn me-3">
                                         <i className="bi bi-google"></i>
                                     </button>
                                 </div>
@@ -403,8 +406,10 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
             <section id="main-nav">
                 <nav className="navbar navbar-expand-lg navbar-dark shadow">
                     <div className={container}>
-                        <Link className="navbar-brand" href="/"><img src="/img/SpacedIn.svg" alt="" /></Link>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <Link className="navbar-brand" href="/"><img src="/img/scopedin.png" alt=""/></Link>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse " id="navbarSupportedContent">
@@ -441,17 +446,24 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
                                     <>
                                         <ul className="navbar-nav ms-auto">
                                             <li className="nav-item dropdown">
-                                                <span className="nav-link dropdown-togsgle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <span className="nav-link dropdown-togsgle" id="navbarDropdown"
+                                                      role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     {/* <img className='rounded-circle authenticated-nav-user me-2' src={user.user_metadata.username} alt="" /> */}
                                                     Account <i className="mx-2 bi bi-person"></i>
                                                 </span>
-                                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                                <ul className="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="navbarDropdown">
                                                     {/* <li><Link className="dropdown-item" href="/profiles/me">Public Profile</Link></li> */}
-                                                    <li><Link className="dropdown-item" href="/profiles/me">Profile</Link></li>
-                                                    <li><Link className="dropdown-item" href="/dashboard/organization">Organization</Link></li>
+                                                    <li><Link className="dropdown-item"
+                                                              href="/profiles/me">Profile</Link></li>
+                                                    <li><Link className="dropdown-item"
+                                                              href="/dashboard/organization">Organization</Link></li>
 
-                                                    <li><hr className="dropdown-divider" /></li>
-                                                    <li><span className="dropdown-item" onClick={handleLogoutClick}>Logout</span></li>
+                                                    <li>
+                                                        <hr className="dropdown-divider"/>
+                                                    </li>
+                                                    <li><span className="dropdown-item"
+                                                              onClick={handleLogoutClick}>Logout</span></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -462,8 +474,12 @@ export default function Navbar({ dashboard }: { dashboard: boolean; }) {
 
                             ) : (
                                 <div className="d-flex">
-                                    <button className="btn btn-outline-primary rounded-pill" onClick={toggleLoginModal}>Login</button>
-                                    <button className="btn btn-outline-secondary rounded-pill ms-2" onClick={toggleRegisterModal}>Register</button>
+                                    <button className="btn btn-outline-primary rounded-pill"
+                                            onClick={toggleLoginModal}>Login
+                                    </button>
+                                    <button className="btn btn-outline-secondary rounded-pill ms-2"
+                                            onClick={toggleRegisterModal}>Register
+                                    </button>
                                 </div>
                             )}
 

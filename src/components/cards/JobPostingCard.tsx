@@ -4,7 +4,7 @@ export default function JobPostingCard() {
             <div className="card mb-3 pb-4 shadow">
                 <div className="row g-0">
                     <div className="col-3 col-md-2 pt-4 ps-4">
-                        <img src="/img/esldark.png" className="img-fluid rounded-start card-image" alt="..." />
+                        <img src="/img/scopedin.png" className="img-fluid rounded-start card-image" alt="..." />
                     </div>
                     <div className="col-9 col-md-10 pt-4">
                         <h5 className="card-title pb-2 ps-1">eSports Marketing Director</h5>

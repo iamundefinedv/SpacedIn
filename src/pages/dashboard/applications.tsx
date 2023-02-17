@@ -7,7 +7,6 @@ import { GetServerSidePropsContext, NextApiRequest } from "next";
 import { useEffect, useState } from "react";
 import { Alert } from "reactstrap";
 
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const supabase = createServerSupabaseClient(context);
 
@@ -30,7 +29,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 }
 
-export default function Profile({ session, data }: { session: Session, data: any; }) {
+export default function Applications({ session, data }: { session: Session, data: any; }) {
 
     const supabase = useSupabaseClient();
     const user = useUser();
@@ -41,74 +40,7 @@ export default function Profile({ session, data }: { session: Session, data: any
     const onDismiss = () => setSuccessAlertVisible(false);
 
     const [loading, setLoading] = useState(false);
-    const [inputError, setInputError] = useState();
 
-    const [isProfileSetup, setIsProfileSetup] = useState();
-
-    const [firstName, setFirstName] = useState<string>(data.first_name || '');
-    const [lastName, setLastName] = useState<string>(data.last_name || '');
-    const [username, setUsername] = useState<string>(data.username || '');
-    const [twitterUsername, setTwitterUsername] = useState<string>(data.twitter_username || '');
-    const [twitchUsername, setTwitchUsername] = useState<string>(data.twitch_username || '');
-    const [youtubeLink, setYoutubeLink] = useState<string>(data.youtube_link || '');
-    const [behanceLink, setBehanceLink] = useState<string>(data.behance_link || '');
-    const [biography, setBiography] = useState<string>(data.biography || '');
-
-
-    const getProfile = async () => {
-        try {
-            setLoading(true);
-
-            // const { data, error, status } = await supabase.from('profiles').select('first_name, last_name, twitter_username, twitch_username, youtube_link, behance_link, biography')
-
-            // if (data) {
-            //     setFirstName(data.firstName);
-            //     setLastName(data.lastName);
-            //     setTwitchUsername(data.twitch_username);
-            //     setTwitterUsername(data.twitter_username);
-            //     setBiography(data.biography);
-            // } else {
-
-            // }
-
-        } catch (err) {
-            console.log(err);
-        } finally {
-            // setTimeout(() => {
-            //     setLoading(false);
-            // }, 2000);
-            setLoading(false);
-        }
-    };
-
-    const updateProfile = async () => {
-        try {
-
-            const { error } = await supabase.from('profiles').upsert({
-                id: user?.id,
-                first_name: firstName,
-                last_name: lastName,
-                username,
-                biography,
-                // avatar_url: user?.user_metadata.avatar_url,
-                twitter_username: twitterUsername,
-                twitch_username: twitchUsername,
-                behance_link: behanceLink,
-                youtube_link: youtubeLink
-            });
-            if (error) throw error;
-
-            setSuccessAlertVisible(true);
-
-        } catch (err) {
-            console.log(err);
-            setErrorAlertVisible(true);
-        }
-    };
-
-
-
-    useEffect(() => { getProfile(); }, [session]);
     useEffect(() => {
         if (successAlertVisible) {
             setTimeout(() => {
@@ -125,16 +57,16 @@ export default function Profile({ session, data }: { session: Session, data: any
         <>
             <Navbar dashboard={true} />
             <div id="layoutSidenav">
-                <DashboardSideNav profile={true} createOrg={false} />
+                <DashboardSideNav profile={true} />
                 <div id="layoutSidenav_content">
                     <main id="profile-settings">
                         <div className="container-fluid px-4 mt-3">
-                            <div className="card mb-4">
+                            <div className="card shadow mb-4">
                                 <div className="card-header bg-primary">
                                     <i className="fas fa-table me-1"></i>
-                                    Public Profile Information
+                                    My Applications
                                 </div>
-                                <div className="card-body">
+                                {/* <div className="card-body">
                                     <Alert color='success' isOpen={successAlertVisible} toggle={onDismiss}>
                                         Your profile has successfully been updated
                                     </Alert>
@@ -206,7 +138,7 @@ export default function Profile({ session, data }: { session: Session, data: any
                                                 </div>
                                             </div>
                                         </div></>}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </main>

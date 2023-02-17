@@ -1,4 +1,34 @@
 A platform for esports players, content creators, graphic and video editors, and esports staff to find a home
+Add a blog to this, organizations can blog?
+
+
+  Basic features For Members
+    * 3 Postings (Staff & Player) combined
+    * 1 Colour banner?
+    Premium level 1 ($10USD a month)
+      * 5 Postings (Staff & Player) combined
+      * Bronze ESEA Star
+    Premium level 2 ($15USD a month)
+      * 5 Postings (Staff & Player) combined
+      * Silver ESEA Star
+    Premium level 3 ($20USD a month)
+      * 10 Postings (Staff & Player) combined
+      * Gold ESEA Star
+      * Custom organization banner
+    Premium level 4 ($35USD a month)
+      * 20 Postings (Staff & Player) combined
+      * Green Or Purple ESEA Star
+      * Custom organization banner
+
+
+  Staff Positions:
+   * GFX editor
+   * VFX Editor ( Video Editor )
+   * Social Media Manager
+   * General Manager
+   * eSports Manager
+   * eSports Game Coach
+   * Community Director / Manager
 
 
 Player Posting:
@@ -70,7 +100,7 @@ id uuid not null references auth.users on delete cascade,
   organization_role text
 
 
-  Registration done threw email?
+[] Make Staff Positions and Player Games editable threw a superadmin dashboard 
 
-  Discord is the main Authentication provider
-  Users can link twitter, google, etc 
+
+

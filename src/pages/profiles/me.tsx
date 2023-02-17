@@ -64,7 +64,7 @@ export default function Profile({ data }: { data: any; }) {
                                                 <h3 className="h2 text-danger mb-1">{data.username}</h3>
                                                 <Link href='/org' className="text-white text-decoration-none">Owner @lionheart</Link>
                                                 <br /><br />
-                                                {user ? <Link href='/dashboard/profile' className="btn btn-primary">Profile Settings</Link> : ''}
+                                                {user ? <Link href='/dashboard' className="btn btn-primary rounded-pill">Profile Settings</Link> : ''}
                                             </div>
                                             <div className="d-flex flex-column">
                                                 {/* <div className="mb-2 mb-xl-3"><span className="h5 me-2">Position:</span> NA</div>

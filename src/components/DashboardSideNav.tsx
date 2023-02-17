@@ -9,7 +9,7 @@ export default function DashboardSideNav({ profile, createOrg = false }: { profi
                         <div className="nav">
                             {profile ? <>
                                 <div className="sb-sidenav-menu-heading">My Profile</div>
-                                <Link className="nav-link" href="/dashboard/profile">
+                                <Link className="nav-link" href="/dashboard">
                                     <div className="sb-nav-link-icon"><i className="bi bi-tachometer"></i></div>
                                     Dashboard
                                 </Link>
@@ -20,7 +20,27 @@ export default function DashboardSideNav({ profile, createOrg = false }: { profi
                                 <Link className="nav-link" href="/dashboard/profile/settings">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Documents
-                                </Link> <Link className="nav-link" href="/dashboard/profile/applications">
+                                </Link>
+
+                                <span className="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                    <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
+                                    Postings
+                                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                </span>
+                                <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                        <Link className="nav-link collapsed" href="/dashboard/staff-postings/index">
+                                            Staff
+                                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                        </Link>
+                                        <a className="nav-link collapsed" href="#">
+                                            Player
+                                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                        </a>
+                                    </nav>
+                                </div>
+
+                                <Link className="nav-link" href="/dashboard/applications">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Applications
                                 </Link>
@@ -29,7 +49,7 @@ export default function DashboardSideNav({ profile, createOrg = false }: { profi
                                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                     Subscription
                                 </Link>
-                                {createOrg ? '' : <Link className="btn btn-sm btn-primary mx-2 mt-3" href="/dashboard/create-org">
+                                {createOrg ? '' : <Link className="btn btn-sm btn-primary mx-2 mt-3 rounded-pill" href="/dashboard/create-org">
                                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                     Create An Org
                                 </Link>}

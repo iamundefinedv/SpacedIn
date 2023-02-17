@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* title and meta tags should be moved outta here */}
-        <title>SpacedIn</title>
+        <title>Scoped In</title>
         <meta name="description" content="A place to find your future in esports" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

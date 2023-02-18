@@ -1,85 +1,89 @@
 :root {
-  --main-bg-colour: #212529 !important;
-  --main-red: #A63446;
-  --main-orange: #A63446;
-  --main-white: #E6E6E6;
+    --main-bg-colour: #212529 !important;
+    --main-red: #A63446;
+    --main-orange: #A63446;
+    --main-white: #E6E6E6;
 }
 
 /* #161618 */
 * {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 *:focus {
-  /* box-shadow: 0 0 0 0.25rem rgba(36, 34, 34, 0.25); */
-  box-shadow: none !important;
+    /* box-shadow: 0 0 0 0.25rem rgba(36, 34, 34, 0.25); */
+    box-shadow: none !important;
 
 }
 
+.text-white {
+    color: var(--main-white) !important;
+}
+
 .rdw-editor-main {
-  background-color: var(--main-bg-colour);
-  color: var(--main-white);
-  height: 300px;
+    background-color: var(--main-bg-colour);
+    color: var(--main-white);
+    height: 300px;
 }
 
 .rdw-editor-toolbar,
 .rdw-option-wrapper {
-  background-color: var(--main-white) !important;
+    background-color: var(--main-white) !important;
 }
 
 .rdw-dropdown-selectedtext {
-  color: var(--main-white);
+    color: var(--main-white);
 }
 
 .rdw-dropdownoption-default {
-  color: var(--main-red);
-  text-decoration: none;
+    color: var(--main-red);
+    text-decoration: none;
 }
 
 .rdw-dropdown-selectedtext:hover {
-  color: var(--main-red);
+    color: var(--main-red);
 
 }
 
 .rdw-dropdown-wrapper {
-  background-color: #303030 !important;
-  color: #a7a7a7 !important;
+    background-color: #303030 !important;
+    color: #a7a7a7 !important;
 }
 
 body,
 .list-group-item {
-  background-color: var(--main-bg-colour);
-  color: var(--main-white);
+    background-color: var(--main-bg-colour);
+    color: var(--main-white);
 }
 
 .list-group-item:hover {
-  background-color: var(--main-red);
-  color: var(--main-white);
+    background-color: var(--main-red);
+    color: var(--main-white);
 }
 
 .container {
-  max-width: 1440px;
-  width: 100%;
+    max-width: 1440px;
+    width: 100%;
 }
 
 .navbar-dark .nav-link {
-  color: var(--main-white) !important;
+    color: var(--main-white) !important;
 }
 
 
 .modal-header,
 .modal-footer,
 .modal-body {
-  background-color: var(--main-bg-colour);
-  border: none;
+    background-color: var(--main-bg-colour);
+    border: none;
 }
 
 .modal-content {
-  border: none;
+    border: none;
 
 }
 
@@ -90,153 +94,153 @@ body,
 .text-danger,
 .bg-danger,
 .btn-danger {
-  color: var(--main-red) !important;
+    color: var(--main-red) !important;
 }
 
 
 .dropdown-item:active {
-  background-color: var(--main-red);
+    background-color: var(--main-red);
 }
 
 .progress {
-  background-color: var(--main-red);
+    background-color: var(--main-red);
 }
 
 .form-select {
-  background-color: var(--main-bg-colour);
-  color: var(--main-white);
+    background-color: var(--main-bg-colour);
+    color: var(--main-white);
 }
 
 .form-control {
-  background-color: var(--main-bg-colour);
-  color: var(--main-white);
-  border-color: #a7a7a7;
+    background-color: var(--main-bg-colour);
+    color: var(--main-white);
+    border-color: #a7a7a7;
 }
 
 .form-control:focus {
-  color: var(--main-white);
-  background-color: var(--main-bg-colour)
+    color: var(--main-white);
+    background-color: var(--main-bg-colour)
 }
 
 .card,
 .dropdown-menu {
-  background-color: var(--main-bg-colour);
+    background-color: var(--main-bg-colour);
 }
 
 .dropdown-menu {
-  background-color: var(--main-bg-colour);
-  color: var(--main-white);
+    background-color: var(--main-bg-colour);
+    color: var(--main-white);
 }
 
 .dropdown-item {
-  color: var(--main-white)
+    color: var(--main-white)
 }
 
 .bg-primary {
-  background-color: var(--main-bg-colour) !important;
-  color: var(--main-white);
+    background-color: var(--main-bg-colour) !important;
+    color: var(--main-white);
 }
 
 .btn-outline-primary {
-  border-color: var(--main-red);
-  color: var(--main-red);
+    border-color: var(--main-red);
+    color: var(--main-red);
 }
 
 .btn-outline-primary:hover {
-  background-color: var(--main-red);
-  border-color: var(--main-red);
-  color: var(--main-white);
+    background-color: var(--main-red);
+    border-color: var(--main-red);
+    color: var(--main-white);
 }
 
 .btn-primary {
-  background-color: var(--main-red) !important;
-  color: var(--main-white);
-  border: none;
+    background-color: var(--main-red) !important;
+    color: var(--main-white);
+    border: none;
 }
 
 .btn-primary:hover {
-  background-color: #bb4859 !important;
+    background-color: #bb4859 !important;
 }
 
 #profile-settings .card label {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* MAIN NAVIGATION BAR */
 
 #main-nav .nav-link {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .authenticated-nav-user {
-  width: 40px;
-  height: 40;
+    width: 40px;
+    height: 40;
 }
 
 
 .navbar-brand img {
-  width: 70px;
-  height: 70px;
+    width: 70px;
+    height: 70px;
 }
 
 /* END MAIN NAVIGATION BAR */
 
 /* HOMEPAGE HERO */
 #hero {
-  margin-top: 5rem;
+    margin-top: 5rem;
 }
 
 #hero h1 {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* END HOMEPAGE HERO */
 /* CARD */
 .card-image {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .card-text,
 .card-title {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* END CARD*/
 
 /* JOB POSTINGS */
 #postings {
-  margin-top: 6rem;
+    margin-top: 6rem;
 }
 
 #postings .latest-jobs {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* END JOB POSTINGS */
 
 /* ORG PAGE */
 #org {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 #org .org-logo {
-  width: 100%;
+    width: 100%;
 }
 
 #create-org {
-  margin: 30px;
+    margin: 30px;
 }
 
 #create-org h1 {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* END ORG PAGE */
 
 /* PROFILE PAGE */
 #profile {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 /* END PROFILE PAGE */

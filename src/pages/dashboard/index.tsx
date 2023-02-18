@@ -1,27 +1,27 @@
 import DashboardSideNav from "@/components/DashboardSideNav";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { createServerSupabaseClient, Session } from "@supabase/auth-helpers-nextjs";
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { GetServerSidePropsContext, NextApiRequest } from "next";
-import { useEffect, useState } from "react";
-import { Alert } from "reactstrap";
+import {createServerSupabaseClient, Session} from "@supabase/auth-helpers-nextjs";
+import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
+import {GetServerSidePropsContext, NextApiRequest} from "next";
+import {useEffect, useState} from "react";
+import {Alert} from "reactstrap";
 
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const supabase = createServerSupabaseClient(context);
 
-    const { data: { session } } = await supabase.auth.getSession();
+    const {data: {session}} = await supabase.auth.getSession();
     if (!session) {
         return {
             redirect: {
-                destination: '/',
+                destination: "/",
                 permanent: false,
             },
         };
     }
 
-    const { data, error, status } = await supabase.from('profiles').select().eq('id', session.user.id).single();
+    const {data, error, status} = await supabase.from("profiles").select().eq("id", session.user.id).single();
 
     return {
         props: {
@@ -30,7 +30,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 }
 
-export default function Profile({ session, data }: { session: Session, data: any; }) {
+export default function Profile({session, data}: { session: Session, data: any; }) {
 
     const supabase = useSupabaseClient();
     const user = useUser();
@@ -45,14 +45,14 @@ export default function Profile({ session, data }: { session: Session, data: any
 
     const [isProfileSetup, setIsProfileSetup] = useState();
 
-    const [firstName, setFirstName] = useState<string>(data.first_name || '');
-    const [lastName, setLastName] = useState<string>(data.last_name || '');
-    const [username, setUsername] = useState<string>(data.username || '');
-    const [twitterUsername, setTwitterUsername] = useState<string>(data.twitter_username || '');
-    const [twitchUsername, setTwitchUsername] = useState<string>(data.twitch_username || '');
-    const [youtubeLink, setYoutubeLink] = useState<string>(data.youtube_link || '');
-    const [behanceLink, setBehanceLink] = useState<string>(data.behance_link || '');
-    const [biography, setBiography] = useState<string>(data.biography || '');
+    const [firstName, setFirstName] = useState<string>(data.first_name || "");
+    const [lastName, setLastName] = useState<string>(data.last_name || "");
+    const [username, setUsername] = useState<string>(data.username || "");
+    const [twitterUsername, setTwitterUsername] = useState<string>(data.twitter_username || "");
+    const [twitchUsername, setTwitchUsername] = useState<string>(data.twitch_username || "");
+    const [youtubeLink, setYoutubeLink] = useState<string>(data.youtube_link || "");
+    const [behanceLink, setBehanceLink] = useState<string>(data.behance_link || "");
+    const [biography, setBiography] = useState<string>(data.biography || "");
 
 
     const getProfile = async () => {
@@ -84,7 +84,7 @@ export default function Profile({ session, data }: { session: Session, data: any
     const updateProfile = async () => {
         try {
 
-            const { error } = await supabase.from('profiles').upsert({
+            const {error} = await supabase.from("profiles").upsert({
                 id: user?.id,
                 first_name: firstName,
                 last_name: lastName,
@@ -107,8 +107,9 @@ export default function Profile({ session, data }: { session: Session, data: any
     };
 
 
-
-    useEffect(() => { getProfile(); }, [session]);
+    useEffect(() => {
+        getProfile();
+    }, [session]);
     useEffect(() => {
         if (successAlertVisible) {
             setTimeout(() => {
@@ -123,9 +124,9 @@ export default function Profile({ session, data }: { session: Session, data: any
 
     return (
         <>
-            <Navbar dashboard={true} />
+            <Navbar dashboard={true}/>
             <div id="layoutSidenav">
-                <DashboardSideNav profile={true} createOrg={false} />
+                <DashboardSideNav profile={true}/>
                 <div id="layoutSidenav_content">
                     <main id="profile-settings">
                         <div className="container-fluid px-4 mt-3">
@@ -135,17 +136,18 @@ export default function Profile({ session, data }: { session: Session, data: any
                                     Public Profile Information
                                 </div>
                                 <div className="card-body">
-                                    <Alert color='success' isOpen={successAlertVisible} toggle={onDismiss}>
+                                    <Alert color="success" isOpen={successAlertVisible} toggle={onDismiss}>
                                         Your profile has successfully been updated
                                     </Alert>
-                                    <Alert color='danger' isOpen={errorAlertVisible} toggle={onDismiss}>
+                                    <Alert color="danger" isOpen={errorAlertVisible} toggle={onDismiss}>
                                         There was an error updating your profile. Please try again later.
                                     </Alert>
                                     {loading ? <>
                                         <div className="d-flex justify-content-center">
                                             <div className="spinner-border text-danger" role="status">
                                             </div>
-                                        </div></> : <>
+                                        </div>
+                                    </> : <>
                                         <div className="container pb-5">
                                             <div className="row">
                                                 <div className="col-md-12 mt-3">
@@ -153,30 +155,57 @@ export default function Profile({ session, data }: { session: Session, data: any
                                                         <div className="row">
                                                             <div className="col">
                                                                 <div className="form-group">
-                                                                    <label htmlFor="exampleFormControlInput1">First Name</label>
-                                                                    <input onChange={e => setFirstName(e.target.value)} value={firstName} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="John" />
+                                                                    <label
+                                                                        htmlFor="exampleFormControlInput1">First Name</label>
+                                                                    <input onChange={e => setFirstName(e.target.value)}
+                                                                           value={firstName} type="text"
+                                                                           className="form-control mt-2"
+                                                                           id="exampleFormControlInput1"
+                                                                           placeholder="John"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col">
                                                                 <div className="form-group">
-                                                                    <label htmlFor="exampleFormControlInput1">Last Name</label>
-                                                                    <input value={lastName} onChange={e => setLastName(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="Doe" />
+                                                                    <label
+                                                                        htmlFor="exampleFormControlInput1">Last Name</label>
+                                                                    <input value={lastName}
+                                                                           onChange={e => setLastName(e.target.value)}
+                                                                           type="text" className="form-control mt-2"
+                                                                           id="exampleFormControlInput1"
+                                                                           placeholder="Doe"/>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="row mt-3">
                                                             <div className="col-6">
                                                                 <div className="form-group">
-                                                                    <label htmlFor="exampleFormControlInput1">Username</label>
-                                                                    <input value={username} onChange={e => setUsername(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="johnDoe001" />
+                                                                    <label
+                                                                        htmlFor="exampleFormControlInput1">Username</label>
+                                                                    <input value={username}
+                                                                           onChange={e => setUsername(e.target.value)}
+                                                                           type="text" className="form-control mt-2"
+                                                                           id="exampleFormControlInput1"
+                                                                           placeholder="johnDoe001"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-6 mt-4">
                                                                 <div className="form-group">
                                                                     <div className="d-flex justify-content-center">
-                                                                        <button style={{ backgroundColor: '#7289da', color: '#fff' }} className="btn me-3 rounded-pill"><i className="bi bi-discord"></i></button>
-                                                                        <button style={{ backgroundColor: '#26a7de', color: '#fff' }} className="btn me-3 rounded-pill"><i className="bi bi-twitter"></i></button>
-                                                                        <button style={{ backgroundColor: '#DB4437', color: '#fff' }} className="btn me-3 rounded-pill"><i className="bi bi-google"></i></button>
+                                                                        <button style={{
+                                                                            backgroundColor: "#7289da",
+                                                                            color: "#fff"
+                                                                        }} className="btn me-3 rounded-pill"><i
+                                                                            className="bi bi-discord"></i></button>
+                                                                        <button style={{
+                                                                            backgroundColor: "#26a7de",
+                                                                            color: "#fff"
+                                                                        }} className="btn me-3 rounded-pill"><i
+                                                                            className="bi bi-twitter"></i></button>
+                                                                        <button style={{
+                                                                            backgroundColor: "#DB4437",
+                                                                            color: "#fff"
+                                                                        }} className="btn me-3 rounded-pill"><i
+                                                                            className="bi bi-google"></i></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -185,32 +214,47 @@ export default function Profile({ session, data }: { session: Session, data: any
                                                             <div className="col-6">
                                                                 <div className="form-group">
                                                                     <label htmlFor="exampleFormControlInput1">YouTube Link (must me a link to your channel)</label>
-                                                                    <input value={youtubeLink} onChange={e => setYoutubeLink(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="https://www.youtube.com/" />
+                                                                    <input value={youtubeLink}
+                                                                           onChange={e => setYoutubeLink(e.target.value)}
+                                                                           type="text" className="form-control mt-2"
+                                                                           id="exampleFormControlInput1"
+                                                                           placeholder="https://www.youtube.com/"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-6">
                                                                 <div className="form-group">
                                                                     <label htmlFor="exampleFormControlInput1">Behance Link</label>
-                                                                    <input value={behanceLink} onChange={e => setBehanceLink(e.target.value)} type="text" className="form-control mt-2" id="exampleFormControlInput1" placeholder="https://www.behance.com/username" />
+                                                                    <input value={behanceLink}
+                                                                           onChange={e => setBehanceLink(e.target.value)}
+                                                                           type="text" className="form-control mt-2"
+                                                                           id="exampleFormControlInput1"
+                                                                           placeholder="https://www.behance.com/username"/>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="form-group mt-3">
-                                                            <label htmlFor="exampleFormControlTextarea1">Biography</label>
-                                                            <textarea value={biography} onChange={e => setBiography(e.target.value)} className="form-control mt-2" id="exampleFormControlTextarea1" placeholder='I like to...' rows={10}></textarea>
+                                                            <label
+                                                                htmlFor="exampleFormControlTextarea1">Biography</label>
+                                                            <textarea value={biography}
+                                                                      onChange={e => setBiography(e.target.value)}
+                                                                      className="form-control mt-2"
+                                                                      id="exampleFormControlTextarea1"
+                                                                      placeholder="I like to..." rows={10}></textarea>
                                                         </div>
                                                         <div className="form-group mt-3">
-                                                            <button className="btn btn-primary float-end rounded-pill" onClick={updateProfile}>Update</button>
+                                                            <button className="btn btn-primary float-end rounded-pill"
+                                                                    onClick={updateProfile}>Update</button>
                                                         </div>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div></>}
+                                        </div>
+                                    </>}
                                 </div>
                             </div>
                         </div>
                     </main>
-                    <Footer />
+                    <Footer/>
                 </div>
             </div>
         </>

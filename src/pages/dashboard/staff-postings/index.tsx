@@ -10,10 +10,11 @@ import {Alert} from "reactstrap";
 import {EditorState, convertToRaw, convertFromHTML, ContentState} from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import dynamic from "next/dynamic";
 import {validate} from "validate.js";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const Editor = dynamic(() => import("react-draft-wysiwyg").then(mod => mod.Editor), {ssr: false});
 
@@ -35,7 +36,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         if (profile.error) {
             throw profile.error;
         }
-        const postings = await supabase.from("postings").select("title").eq("user_id", session.user.id);
+        const postings = await supabase.from("postings").select("title, slug").eq("profile_id", session.user.id);
         if (postings.error) {
             throw postings.error;
         }
@@ -58,7 +59,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 interface PostingProps {
     title: string,
-    id: number
+    id: number,
+    slug: string
 }
 
 export default function Index({session, userData}: {
@@ -168,7 +170,7 @@ export default function Index({session, userData}: {
             const {data, error} = await supabase
                 .from("postings")
                 .update({slug})
-                .eq("id", id).eq("user_id", user?.id);
+                .eq("id", id).eq("profile_id", user?.id);
 
             if (error) {
                 console.log(error.message);
@@ -228,8 +230,10 @@ export default function Index({session, userData}: {
                                                     <div className="list-group shadow-sm">
                                                         {userData.postingsData.map(posting => (
                                                             <div key={posting.id}>
-                                                                <a href="dashboard#"
-                                                                   className="list-group-item list-group-item-action">{posting.title}</a>
+                                                                <Link key={posting.id}
+                                                                      href={`/dashboard/staff-postings/${posting.slug}`}
+                                                                      className="list-group-item list-group-item-action">{posting.title}
+                                                                </Link>
                                                             </div>
                                                         ))}
 
@@ -269,9 +273,9 @@ export default function Index({session, userData}: {
                                                                        onChange={e => setHidden(e.target.checked)}
                                                                        type="checkbox" className="form-check-input"
                                                                        id="exampleCheck1"/>
-                                                                <label className="form-check-label text-muted"
-                                                                       htmlFor="exampleCheck1">Hidden? ( all postings
-                                                                    are public by default )</label>
+                                                                <label className="form-check-label text-danger"
+                                                                       htmlFor="exampleCheck1">Hidden
+                                                                    )</label>
                                                             </div>
                                                             <div className="mb-3">
                                                                 <label htmlFor="exampleInputPassword1"

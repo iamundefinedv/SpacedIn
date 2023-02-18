@@ -31,20 +31,20 @@ export default function Home() {
             <section id="postings">
                 <div className="container mt-5">
                     <div className="row">
-                        <div className="col-md-6">
-                            <h3 className='text-center mb-4'>Latest eSports Jobs</h3>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                        </div>
-                        <div className="col-md-6">
-                            <h3 className='text-center mb-4'>Latest Free Agents</h3>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                            <JobPostingCard/>
-                        </div>
+                        {/*<div className="col-md-6">*/}
+                        {/*    <h3 className='text-center mb-4'>Latest eSports Jobs</h3>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*</div>*/}
+                        {/*<div className="col-md-6">*/}
+                        {/*    <h3 className='text-center mb-4'>Latest Free Agents</h3>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*    <JobPostingCard/>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </section>

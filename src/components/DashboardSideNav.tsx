@@ -10,43 +10,43 @@ export default function DashboardSideNav({ profile, createOrg = false }: { profi
                             {profile ? <>
                                 <div className="sb-sidenav-menu-heading">My Profile</div>
                                 <Link className="nav-link" href="/dashboard">
-                                    <div className="sb-nav-link-icon"><i className="bi bi-tachometer"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-house fs-4 text-danger"></i></div>
                                     Dashboard
                                 </Link>
                                 <Link className="nav-link" href="/dashboard">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-bell fs-4 text-danger"></i></div>
                                     Notifications
                                 </Link>
                                 <Link className="nav-link" href="/dashboard/profile/settings">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-file-earmark-pdf fs-4 text-danger"></i></div>
                                     Documents
                                 </Link>
 
                                 <span className="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-postcard fs-4 text-danger"></i></div>
                                     Postings
                                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                 </span>
                                 <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                     <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                        <Link className="nav-link collapsed" href="/dashboard/staff-postings/index">
+                                        <Link className="nav-link collapsed" href="/dashboard/staff-postings/">
+                                            <i className="bi bi-person-gear me-2 fs-4 text-danger"></i>
                                             Staff
-                                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                         </Link>
-                                        <a className="nav-link collapsed" href="#">
+                                        <Link className="nav-link collapsed" href="/dashboard/staff-postings/">
+                                            <i className="bi bi-controller me-2 fs-4 text-danger"></i>
                                             Player
-                                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                                        </a>
+                                        </Link>
                                     </nav>
                                 </div>
 
                                 <Link className="nav-link" href="/dashboard/applications">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-card-text fs-4 text-danger"></i></div>
                                     Applications
                                 </Link>
                                 {/* <div className="sb-sidenav-menu-heading">Profile Settings</div> */}
                                 <Link className="nav-link" href="/dashboard">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-wallet2 fs-4 text-danger"></i></div>
                                     Subscription
                                 </Link>
                                 {createOrg ? '' : <Link className="btn btn-sm btn-primary mx-2 mt-3 rounded-pill" href="/dashboard/create-org">

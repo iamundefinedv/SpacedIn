@@ -1,12 +1,12 @@
-import {useSupabaseClient, useUser} from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import modal from "bootstrap/js/dist/modal";
 import Link from "next/link";
-import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
-import {Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Label, Alert} from "reactstrap";
-import {validate} from "validate.js";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Input, Label, Alert } from "reactstrap";
+import { validate } from "validate.js";
 
-export default function Navbar({dashboard}: { dashboard: boolean; }) {
+export default function Navbar({ dashboard }: { dashboard: boolean; }) {
 
     const container = dashboard ? "container-fluid" : "container";
 
@@ -14,7 +14,6 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
 
     const [loginModal, setLoginModal] = useState(false);
     const toggleLoginModal = () => setLoginModal(!loginModal);
-
     const [registerModal, setRegisterModal] = useState(false);
     const toggleRegisterModal = () => setRegisterModal(!registerModal);
 
@@ -92,7 +91,7 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
             }
 
             try {
-                const {error} = await supabaseClient.auth.signUp({
+                const { error } = await supabaseClient.auth.signUp({
                     email,
                     password,
                     options: {
@@ -160,7 +159,7 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
             setErrorAlertVisible(true);
         } else {
             try {
-                const {error} = await supabaseClient.auth.signInWithPassword({
+                const { error } = await supabaseClient.auth.signInWithPassword({
                     email, password
                 });
                 if (error) {
@@ -182,13 +181,13 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
     };
 
     const signInWithDiscord = async () => {
-        const {error} = await supabaseClient.auth.signInWithOAuth({
+        const { error } = await supabaseClient.auth.signInWithOAuth({
             provider: "discord"
         });
     };
 
     const handleLogoutClick = async () => {
-        const {error} = await supabaseClient.auth.signOut();
+        const { error } = await supabaseClient.auth.signOut();
         router.push("/");
     };
 
@@ -259,13 +258,13 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
                                 <p className="text-center mb-3">OR</p>
                                 <div className="d-flex justify-content-center">
                                     <button onClick={signInWithDiscord}
-                                            style={{backgroundColor: "#7289da", color: "#fff"}} className="btn me-3">
+                                        style={{ backgroundColor: "#7289da", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-discord"></i>
                                     </button>
-                                    <button style={{backgroundColor: "#26a7de", color: "#fff"}} className="btn me-3">
+                                    <button style={{ backgroundColor: "#26a7de", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-twitter"></i>
                                     </button>
-                                    <button style={{backgroundColor: "#DB4437", color: "#fff"}} className="btn me-3">
+                                    <button style={{ backgroundColor: "#DB4437", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-google"></i>
                                     </button>
                                 </div>
@@ -387,13 +386,13 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
                                 <p className="text-center mb-3">OR</p>
                                 <div className="d-flex justify-content-center">
                                     <button onClick={signInWithDiscord}
-                                            style={{backgroundColor: "#7289da", color: "#fff"}} className="btn me-3">
+                                        style={{ backgroundColor: "#7289da", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-discord"></i>
                                     </button>
-                                    <button style={{backgroundColor: "#26a7de", color: "#fff"}} className="btn me-3">
+                                    <button style={{ backgroundColor: "#26a7de", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-twitter"></i>
                                     </button>
-                                    <button style={{backgroundColor: "#DB4437", color: "#fff"}} className="btn me-3">
+                                    <button style={{ backgroundColor: "#DB4437", color: "#fff" }} className="btn me-3">
                                         <i className="bi bi-google"></i>
                                     </button>
                                 </div>
@@ -406,10 +405,10 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
             <section id="main-nav">
                 <nav className="navbar navbar-expand-lg navbar-dark shadow">
                     <div className={container}>
-                        <Link className="navbar-brand" href="/"><img src="/img/scopedin.png" alt=""/></Link>
+                        <Link className="navbar-brand" href="/"><img src="/img/scopedin.png" alt="" /></Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse " id="navbarSupportedContent">
@@ -447,7 +446,7 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
                                         <ul className="navbar-nav ms-auto">
                                             <li className="nav-item dropdown">
                                                 <span className="nav-link dropdown-togsgle" id="navbarDropdown"
-                                                      role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     {/* <img className='rounded-circle authenticated-nav-user me-2' src={user.user_metadata.username} alt="" /> */}
                                                     Account <i className="mx-2 bi bi-person"></i>
                                                 </span>
@@ -455,15 +454,24 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
                                                     aria-labelledby="navbarDropdown">
                                                     {/* <li><Link className="dropdown-item" href="/profiles/me">Public Profile</Link></li> */}
                                                     <li><Link className="dropdown-item"
-                                                              href="/profiles/me">Profile</Link></li>
+                                                        href="/profiles/me">Profile</Link></li>
                                                     <li><Link className="dropdown-item"
-                                                              href="/dashboard/organization">Organization</Link></li>
+                                                        href="/dashboard/organization">Organization</Link></li>
 
                                                     <li>
-                                                        <hr className="dropdown-divider"/>
+                                                        <hr className="dropdown-divider" />
                                                     </li>
-                                                    <li><span className="dropdown-item"
-                                                              onClick={handleLogoutClick}>Logout</span></li>
+                                                    <li>
+                                                        <Link href="/dashboard" className="dropdown-item">
+                                                            Dashboard
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <span className="dropdown-item"
+                                                            onClick={handleLogoutClick}>
+                                                            Logout
+                                                        </span>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -475,10 +483,10 @@ export default function Navbar({dashboard}: { dashboard: boolean; }) {
                             ) : (
                                 <div className="d-flex">
                                     <button className="btn btn-outline-primary rounded-pill"
-                                            onClick={toggleLoginModal}>Login
+                                        onClick={toggleLoginModal}>Login
                                     </button>
                                     <button className="btn btn-outline-secondary rounded-pill ms-2"
-                                            onClick={toggleRegisterModal}>Register
+                                        onClick={toggleRegisterModal}>Register
                                     </button>
                                 </div>
                             )}
